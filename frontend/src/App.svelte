@@ -70,8 +70,9 @@
           <button
             on:click={() => getImg()}
             class="bg-gray-800 text-white py-2 px-10 rounded-md"
-            >Get Image</button
           >
+            Get Image
+          </button>
         </div>
       </div>
 
