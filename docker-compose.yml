@@ -1,0 +1,10 @@
+version: "3"
+services:
+  html-static-site:
+    build: ./frontend
+    ports:
+      - "4000:80"
+  backend-site:
+    build: ./backend
+    ports:
+      - "8088:80"
