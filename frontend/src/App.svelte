@@ -23,7 +23,7 @@
       numbers: arrNumber,
     };
 
-    let request = await fetch("http://54.82.234.201:8088/process-image", {
+    let request = await fetch("http://54.210.69.255:8088/process-image", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
