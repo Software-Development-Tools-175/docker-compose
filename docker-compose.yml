@@ -1,10 +1,12 @@
 version: "3"
 services:
   frontend:
-    build: ./frontend
-    ports:
-      - "4000:80"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: santhitak/process-image-frontend
   backend:
-    build: ./backend
-    ports:
-      - "8088:80"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: santhitak/process-image-backend

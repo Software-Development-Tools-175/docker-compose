@@ -1,11 +1,42 @@
 pipeline {
     agent any
 
-
     stages {
+        stage('Initialize Stage') {
+            steps {
+                dir('docker-compose') {
+                    echo "Current path is  ${pwd()}"
+                    sh 'docker-compose down --rmi all --volumes || true'
+                }
+            }
+        }
 
+
+        stage('Build Stage') {
+            steps {
+                dir('docker-compose') {
+                    echo "Current path is ${pwd()}"
+                    sh "docker-compose build"
+                }
+            }
+        }
 
         stage('Triggering slave job') {
+            steps {
+                dir('docker-compose') {
+                    withCredentials(
+                        [usernamePassword(
+                            credentialsId: 'dockerhub',
+                            passwordVariable: 'DOCKER_PASSWORD',
+                            usernameVariable: 'DOCKER_USERNAME'
+                        )]
+                    ) {
+                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                    }
+                    sh 'docker push santhitak/process-image-frontend'
+                    sh 'docker push santhitak/process-image-backend'
+                }
+            }
             steps {
                 echo 'Triggering ...'
                 build job: 'slave'
