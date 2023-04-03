@@ -18,7 +18,7 @@ pipeline {
             }
         }
 
-        stage('Pull Image from Docker') {
+        stage('Triggering slave job') {
             steps {
                 echo 'Triggering ...'
                 build job: 'slave'
