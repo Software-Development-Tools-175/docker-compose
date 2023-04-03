@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initialize Stage') {
+            steps {
+              echo "Current path is ${pwd()}"
+            }
+        }
+    }
+
+}

@@ -14,7 +14,14 @@ pipeline {
         stage('Build Stage') {
             steps {
                 echo "Current path is ${pwd()}"
-                sh "docker-compose up build -d"
+                sh "docker-compose build"
+            }
+        }
+
+        stage('Pull Image from Docker') {
+            steps {
+                echo 'Triggering ...'
+                build job: 'slave'
             }
         }
     }
