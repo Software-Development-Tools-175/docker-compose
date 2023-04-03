@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Triggering slave job') {
+        stage('Push Images to Docker Hub') {
             steps {
                 dir('docker-compose') {
                     withCredentials(
@@ -37,6 +37,9 @@ pipeline {
                     sh 'docker push santhitak/process-image-backend'
                 }
             }
+        }
+
+        stage('Triggering slave job') {
             steps {
                 echo 'Triggering ...'
                 build job: 'slave'
